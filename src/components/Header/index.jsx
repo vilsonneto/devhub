@@ -1,0 +1,29 @@
+import { Link, useHistory } from "react-router-dom";
+import { HeaderContainer } from "./style";
+
+export const Header = () => {
+  const history = useHistory();
+  const sendHome = () => {
+    history.push("/");
+  };
+
+  return (
+    <HeaderContainer>
+      <div>
+        <h1 className="logo" onClick={sendHome}>
+          <span className="logo-kenzie">Kenzie</span>
+          <span className="logo-hub">hub</span>
+        </h1>
+      </div>
+      <div className="menu">
+        <Link className="login" to="/Login">
+          sign in
+        </Link>
+        <span>|</span>
+        <Link className="register" to="/Register">
+          sign up
+        </Link>
+      </div>
+    </HeaderContainer>
+  );
+};
