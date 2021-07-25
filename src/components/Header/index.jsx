@@ -1,14 +1,14 @@
 import { Link, useHistory } from "react-router-dom";
 import { HeaderContainer } from "./style";
 
-export const Header = () => {
+export const Header = ({ noMenu }) => {
   const history = useHistory();
   const sendHome = () => {
     history.push("/");
   };
 
   return (
-    <HeaderContainer>
+    <HeaderContainer noMenu={noMenu}>
       <div>
         <h1 className="logo" onClick={sendHome}>
           <span className="logo-kenzie">Kenzie</span>

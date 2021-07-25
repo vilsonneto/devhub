@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const HeaderContainer = styled.header`
   display: flex;
-  justify-content: space-between;
+  justify-content: ${(props) => (props.noMenu ? "center" : "space-between")};
   align-items: center;
   height: 68px;
 
@@ -24,6 +24,7 @@ export const HeaderContainer = styled.header`
   .menu {
     margin-right: 23px;
     font-size: 20px;
+    display: ${(props) => (props.noMenu ? "none" : "block")};
 
     .login {
       color: var(--matte-black);
@@ -40,10 +41,12 @@ export const HeaderContainer = styled.header`
   }
 
   @media (min-width: 768px) {
+    justify-content: space-between;
     .logo {
       margin-left: 51px;
     }
     .menu {
+      display: block;
       margin-right: 42px;
     }
   }
