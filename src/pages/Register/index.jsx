@@ -1,17 +1,19 @@
-import { useHistory } from "react-router-dom";
+import { Redirect, useHistory } from "react-router-dom";
 import { Button } from "../../components/Button";
 import { Header } from "../../components/Header";
 import { RegisterContainer } from "./style";
 import { Input } from "../../components/Input";
-import { FiUser, FiMail, FiLock } from "react-icons/fi";
+import { FiUser, FiMail, FiLock, FiLinkedin, FiCompass } from "react-icons/fi";
 import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { toast } from "react-toastify";
+import api from "../../services/api";
 
-export const Register = () => {
+export const Register = ({ authenticated }) => {
   const history = useHistory();
   const sendLogin = () => {
-    history.push("/Login");
+    history.push("/login");
   };
 
   const schema = yup.object().shape({
@@ -38,6 +40,12 @@ export const Register = () => {
     confirmPassword: yup
       .string()
       .oneOf([yup.ref("password"), null], "Passwords must match"),
+    contact: yup
+      .string()
+      .required("Required linkedin")
+      .matches(/([\w]+\.)?linkedin\.com\/in\/[A-z0-9_-]+\/?/, "Invalid Link"),
+    module: yup.string().required("Required module"),
+    bio: yup.string().required("Required bio"),
   });
 
   const {
@@ -48,7 +56,48 @@ export const Register = () => {
     resolver: yupResolver(schema),
   });
 
-  const submitFormRegister = (data) => console.log(data);
+  const submitFormRegister = (data) => {
+    const { name, email, password, contact, module, bio } = data;
+    const user = {
+      name: name,
+      email: email,
+      password: password,
+      contact: contact,
+      course_module: module,
+      bio: bio,
+    };
+
+    api
+      .post("/users", user)
+      .then((response) => {
+        toast.success(" You have successfully registered!", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+
+        history.push("/login");
+      })
+      .catch((err) => {
+        toast.error("E-mail already registered!", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+      });
+  };
+
+  if (authenticated) {
+    return <Redirect to="/perfil" />;
+  }
 
   return (
     <>
@@ -98,6 +147,27 @@ export const Register = () => {
                   error={errors.confirmPassword?.message}
                   placeholder="Confirm password"
                   type="password"
+                />
+                <Input
+                  icon={FiLinkedin}
+                  register={register}
+                  name="contact"
+                  error={errors.contact?.message}
+                  placeholder="LinkedIn"
+                />
+                <Input
+                  icon={FiCompass}
+                  register={register}
+                  name="module"
+                  error={errors.module?.message}
+                  placeholder="Course module"
+                />
+                <Input
+                  icon={FiCompass}
+                  register={register}
+                  name="bio"
+                  error={errors.module?.message}
+                  placeholder="Your bio"
                 />
                 <p className="subtext">
                   Already have an Account?

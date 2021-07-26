@@ -16,11 +16,11 @@ export const Header = ({ noMenu }) => {
         </h1>
       </div>
       <div className="menu">
-        <Link className="login" to="/Login">
+        <Link className="login" to="/login">
           sign in
         </Link>
         <span>|</span>
-        <Link className="register" to="/Register">
+        <Link className="register" to="/register">
           sign up
         </Link>
       </div>

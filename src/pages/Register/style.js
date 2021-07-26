@@ -47,7 +47,7 @@ export const RegisterContainer = styled.div`
     .register-box {
       display: flex;
       width: 720px;
-      height: 562px;
+      height: 770px;
       border: 2px solid var(--baby-blue);
       border-radius: 25px;
 
