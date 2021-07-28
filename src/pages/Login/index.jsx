@@ -53,8 +53,8 @@ export const Login = ({ authenticated, setAuthenticated, setIdUser }) => {
         });
 
         const { id } = response.data.user;
-
-        setIdUser(id);
+        localStorage.setItem("@Kenziehub:id", JSON.stringify(id));
+        // setIdUser(id);
 
         setAuthenticated(true);
         history.push("/perfil");

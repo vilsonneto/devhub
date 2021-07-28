@@ -5,33 +5,75 @@ import { Header } from "../../components/Header";
 import api from "../../services/api";
 import { FiLinkedin, FiTrash2 } from "react-icons/fi";
 import { PerfilContainer } from "./style";
+import { ModalTech } from "../../components/ModalTech";
+import { toast } from "react-toastify";
 
 export const Perfil = ({ authenticated, setAuthenticated, idUser }) => {
   const [user, setUser] = useState({});
+  const [modalNewTech, setModalNewTech] = useState(false);
 
   useEffect(() => {
-    api.get(`/users/${idUser}`).then((response) => {
-      console.log(response.data);
-      setUser(response.data);
-    });
-  }, [idUser]);
+    const id = JSON.parse(localStorage.getItem("@Kenziehub:id"));
+    const token = JSON.parse(localStorage.getItem("@Kenziehub:token"));
+    api
+      .get(`/users/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((response) => {
+        console.log(response.data);
+        setUser(response.data);
+      });
+  }, [user]);
 
-  // eslint-disable-next-line no-unused-vars
-  const Logout = () => {
-    localStorage.removeItem("@Kenziehub:token");
-    setUser({});
-    setAuthenticated(false);
+  const deleteTech = (id) => {
+    const token = JSON.parse(localStorage.getItem("@Kenziehub:token"));
+
+    api
+      .delete(`/users/techs/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((response) => {
+        toast.success("Technology successfully deleted!", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+      })
+      .catch((err) => {
+        toast.error("Something went wrong!", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+      });
   };
 
   if (authenticated === false) {
     return <Redirect to="/login" />;
   }
 
+  const OpenModalNewTech = () => setModalNewTech(true);
+
   return (
     <>
-      <Header />
+      <Header
+        logged={authenticated}
+        setAuthenticated={setAuthenticated}
+        setUser={setUser}
+      />
       <PerfilContainer>
-        <button onClick={Logout}>Logout</button>
         <div className="header-perfil">
           <div className="image-box">
             <div className="image-perfil"></div>
@@ -62,13 +104,18 @@ export const Perfil = ({ authenticated, setAuthenticated, idUser }) => {
                     <span className="tech-status">{item.status}</span>
                   </div>
 
-                  <button>
+                  <button onClick={() => deleteTech(item.id)}>
                     <FiTrash2 />
                   </button>
                 </div>
               );
             })}
+          <button className="add-tech" onClick={OpenModalNewTech}>
+            +
+          </button>
         </div>
+
+        {modalNewTech && <ModalTech setModalNewTech={setModalNewTech} />}
       </PerfilContainer>
     </>
   );

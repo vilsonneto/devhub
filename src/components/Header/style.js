@@ -40,6 +40,13 @@ export const HeaderContainer = styled.header`
     }
   }
 
+  .exit {
+    margin-right: 23px;
+    cursor: pointer;
+    color: var(--matte-black);
+    font-size: 20px;
+  }
+
   @media (min-width: 768px) {
     justify-content: space-between;
     .logo {
@@ -47,6 +54,10 @@ export const HeaderContainer = styled.header`
     }
     .menu {
       display: block;
+      margin-right: 42px;
+    }
+
+    .exit {
       margin-right: 42px;
     }
   }
