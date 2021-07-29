@@ -96,11 +96,22 @@ export const PerfilContainer = styled.div`
         margin-left: 5px;
       }
 
-      button {
-        font-size: 20px;
-
-        background: transparent;
-        border: none;
+      .buttons-list {
+        button {
+          font-size: 20px;
+          margin-left: 10px;
+          background: transparent;
+          border: none;
+        }
+        .level-up {
+          color: green;
+        }
+        .level-down {
+          color: var(--red);
+        }
+        .delete {
+          color: var(--gray);
+        }
       }
     }
     .add-tech {
