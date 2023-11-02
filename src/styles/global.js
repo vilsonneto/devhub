@@ -20,10 +20,11 @@ export default createGlobalStyle`
         --red: #ca0b0b;
     }
 
-    body {
+    body > div {
         background-color: var(---white);
         color: var(---black);
         font-family: 'Roboto', sans-serif;
+        min-height: 100vh;
     }
 
     a {

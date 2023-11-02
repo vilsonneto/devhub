@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 export const RegisterContainer = styled.div`
+
   .register-box {
     .image-container {
       display: none;
@@ -10,6 +11,7 @@ export const RegisterContainer = styled.div`
       display: flex;
       flex-direction: column;
       align-items: center;
+
 
       .container-form {
         width: 268px;
@@ -43,6 +45,7 @@ export const RegisterContainer = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
+    height: 80vh;
 
     .register-box {
       display: flex;

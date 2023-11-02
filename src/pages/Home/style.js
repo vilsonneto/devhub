@@ -3,7 +3,9 @@ import styled from "styled-components";
 export const Main = styled.main`
   display: flex;
   flex-direction: column;
-  min-height: 80vh;
+  justify-content: center;
+  align-items: center;
+  
 
   .presentation {
     display: flex;
@@ -81,6 +83,7 @@ export const Main = styled.main`
     }
 
     @media (min-width: 1180px) {
+      height: 90vh;
       flex-direction: row;
       .presentation {
         align-items: center;
