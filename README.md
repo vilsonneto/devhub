@@ -2,8 +2,6 @@
   <span color="#275FB3">Dev</span><span color="#444444">hub</span>
 </h1>
 
-#
-
 Devhub is a React application designed as a portfolio hub for developers to showcase their skills and projects.
 
 ## Installation
