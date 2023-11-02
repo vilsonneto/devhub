@@ -18,7 +18,7 @@ export const Header = ({ noMenu, logged, setAuthenticated, setUser }) => {
     <HeaderContainer noMenu={noMenu}>
       <div>
         <h1 className="logo" onClick={sendHome}>
-          <span className="logo-kenzie">Kenzie</span>
+          <span className="logo-kenzie">Dev</span>
           <span className="logo-hub">hub</span>
         </h1>
       </div>
