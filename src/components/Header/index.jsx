@@ -2,10 +2,6 @@ import { Link, useHistory } from "react-router-dom";
 import { HeaderContainer } from "./style";
 
 export const Header = ({ noMenu, logged, setAuthenticated, setUser }) => {
-  const history = useHistory();
-  const sendHome = () => {
-    history.push("/");
-  };
 
   const Logout = () => {
     localStorage.removeItem("@Kenziehub:token");
@@ -17,10 +13,12 @@ export const Header = ({ noMenu, logged, setAuthenticated, setUser }) => {
   return (
     <HeaderContainer noMenu={noMenu}>
       <div>
-        <h1 className="logo" onClick={sendHome}>
-          <span className="logo-kenzie">Dev</span>
-          <span className="logo-hub">hub</span>
-        </h1>
+        <Link to="/">
+          <h1 className="logo" >
+            <span className="logo-kenzie">Dev</span>
+            <span className="logo-hub">hub</span>
+          </h1>
+        </Link>
       </div>
 
       {logged ? (
