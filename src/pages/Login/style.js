@@ -55,6 +55,7 @@ export const LoginContainer = styled.div`
     }
   }
   @media (min-width: 768px) {
+    height: 90vh;
     display: flex;
     justify-content: center;
     align-items: center;

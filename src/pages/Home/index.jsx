@@ -10,7 +10,7 @@ export const Home = () => {
   };
 
   return (
-    <div>
+    <>
       <Header />
       <Main>
         <div className="presentation">
@@ -31,6 +31,6 @@ export const Home = () => {
           <div className="image-container"></div>
         </div>
       </Main>
-    </div>
+    </>
   );
 };
