@@ -4,7 +4,7 @@
 
 #
 
-Foobar is a Python library for dealing with word pluralization.
+Devhub is a React application designed as a portfolio hub for developers to showcase their skills and projects.
 
 ## Installation
 
